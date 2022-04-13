@@ -127,6 +127,7 @@
           <el-menu-item index="/login">登录</el-menu-item>
           <el-menu-item index="/register">注册</el-menu-item>
           <el-menu-item index="4">订单管理</el-menu-item>
+          <el-menu-item index="4">个人中心</el-menu-item>
         </el-menu>
       </div>
     </div>
@@ -146,7 +147,10 @@
             </div>
             <div class="dropdown">
               <el-badge :value="12" class="item">
-                <el-button size="small">我的购物车</el-button>
+                <router-link :to="'/cart'">
+                  <el-button size="small">我的购物车</el-button>
+                </router-link>
+                
               </el-badge>
             </div>
           </div>
@@ -194,13 +198,12 @@ export default {
   computed: {},
   methods: {
     search() {
-      console.log(this.$router.app._route.fullPath);
+      // console.log(this.$router.app._route.fullPath);
+      this.$bus.$emit('search', this.input)
       if (this.$router.app._route.fullPath === '/search') {
-        this.$bus.$emit('search', this.input)
         return
       }
       this.$router.push('/search');
-      this.$bus.$emit('search', this.input)
     }
   },
 }

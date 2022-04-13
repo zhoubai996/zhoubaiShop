@@ -20,4 +20,17 @@ export const reqGetLevelTwoCla = (parentId) => request({url: `/cla/children/${pa
 export const reqGetClaGoods = (id, pageNum, pageSize) => request({url: `/goods/search?id=${id}&pageNum=${pageNum}&pageSize=${pageSize}`})
 // 搜索商品接口
 export const reqGetSearch = (goods_name, pageNum, pageSize) => request({url: `/goods/search?pageNum=${pageNum}&pageSize=${pageSize}`, method: 'post', data: {goods_name}})
-
+// 加入购物车接口
+export const addShopCarts = (goods_id) => request({url: '/carts', method: 'post', data: {goods_id}})
+// 获取购物车接口
+export const reqGetCarts = (pageNum, pageSize) => request({url: `/carts?pageNum=${pageNum}&pageSize=${pageSize}`, method: 'get'})
+// 更新购物车接口
+export const updateCart = (id, goodsInfo) => request({url: `/carts/${id}`, method: 'patch', data: goodsInfo})
+// 全选与全不选接口
+export const updateAllCheck = (check) => request({url: `carts/select/${check}`, method: 'post'})
+// 删除商品接口
+export const deleteCartGoods = (ids) => request({url: '/carts', method: 'delete', data: {ids}})
+// 获取订单地址
+export const reqGetAddress = () => request({url: '/address', method: 'get'})
+// 提交订单
+export const addOrder = (orderInfo) => request({url: '/orders', method: 'post', data: orderInfo})

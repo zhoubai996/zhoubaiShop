@@ -132,8 +132,8 @@
               <i class="command">已有<span>2000</span>人评价</i>
             </div>
             <div class="operate">
-              <a href="success-cart.html" target="_blank" class="sui-btn btn-bordered btn-danger">加入购物车</a>
-              <a href="javascript:void(0);" class="sui-btn btn-bordered">收藏</a>
+              <el-button type="success" plain @click="addCarts(goods.id)">加入购物车</el-button>
+              <el-button type="info" plain>收藏</el-button>
             </div>
           </div>
         </li>
@@ -153,6 +153,21 @@ export default {
   },
   created() {},
   computed: {},
-  methods: {},
+  methods: {
+    async addCarts(id) {
+      try {
+        await this.$store.dispatch('addCart', id)
+        this.$message({
+          message: '添加购物车成功',
+          type: 'success'
+        })
+      } catch (e) {
+        this.$message({
+          message: `添加购物车失败：${e}`,
+          typs: 'warning'
+        })
+      }
+    }
+  },
 }
 </script>

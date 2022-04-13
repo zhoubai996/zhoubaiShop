@@ -17,13 +17,14 @@
     width: 400px;
     margin: auto;
   }
-}</style>
+}
+</style>
 <template>
   <div class="goods-container">
     <div class="class-list w clearfix">
       <ul>
         <li>分类 :</li>
-        <li v-for="(item, index) in levelTwoList" :key="item.id" @click="getGoodsCla(item.id)">{{item.cla_name}}</li>
+        <li v-for="(item, index) in levelTwoList" :key="item.id" @click="getGoodsCla(item.id)">{{ item.cla_name }}</li>
       </ul>
     </div>
     <div class="goods-box">
@@ -32,7 +33,7 @@
     <div class="paging">
       <div class="paging-box">
         <Paging :total="claGoodsTotal" :pageSize="parseInt(claGoodsSize)" @changePage="changePage"></Paging>
-        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -69,7 +70,7 @@ export default {
     // 获取商品数据
     claGoodsInfo(id) {
       let { paNum, paSize } = this
-      this.$store.dispatch('claGoods', { id,paNum, paSize })
+      this.$store.dispatch('claGoods', { id, paNum, paSize })
     },
     // 获取二级分类
     levelTwo() {
@@ -83,7 +84,7 @@ export default {
     getGoodsCla(id) {
       this.id = id
       this.claGoodsInfo(id)
-    }
+    },
   },
 }
 </script>
