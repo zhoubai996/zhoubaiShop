@@ -82,7 +82,8 @@ export default {
         this.$message({
             message: '提交成功',
             type: 'success'
-          })
+        })
+        this.$router.push('/orderman')
       } catch (e) {
         this.$message({
             message: `提交失败:${e}`,
@@ -90,28 +91,8 @@ export default {
           })
       }
     },
-    async resetForm(formName) {
-      this.ruleForm.address_id = parseInt(this.ruleForm.address_id)
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          console.log('格式验证成功');
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
-      try {
-        await this.$store.dispatch('addOrderInfo', this.ruleForm)
-        this.$message({
-            message: '取消成功',
-            type: 'success'
-          })
-      } catch (e) {
-        this.$message({
-            message: `取消失败:${e}`,
-            type: 'warning'
-          })
-      }
+    resetForm() {
+      this.$router.go(-1)
     },
     getAddress() {
       this.$store.dispatch('getAddress')

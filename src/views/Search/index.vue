@@ -5,7 +5,8 @@
     width: 400px;
     margin: auto;
   }
-}</style>
+}
+</style>
 <template>
   <div class="search-container">
     <div class="goods-box">
@@ -14,7 +15,7 @@
     <div class="paging">
       <div class="paging-box">
         <Paging :total="searchTotal" :pageSize="parseInt(searchSize)" @changePage="changePage"></Paging>
-        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -25,6 +26,7 @@ import GoodsList from '@/components/GoodsList.vue'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Search',
+  inject: ['reload'],
   data() {
     return {
       goods_name: '',
@@ -49,18 +51,24 @@ export default {
   },
   methods: {
     // 获取商品数据
-    searchGoodsInfo(name) {
-      let { pageNum, pageSize } = this
-      this.goods_name = name
-      this.$store.dispatch('searchGoods', { name, pageNum, pageSize })
+    async searchGoodsInfo(name) {
+      try {
+        let { pageNum, pageSize } = this
+        this.goods_name = name
+        this.$store.dispatch('searchGoods', { name, pageNum, pageSize })
+        this.reload()
+      } catch (e) {
+        this.$message({
+          message: '搜索错误',
+          type: 'warning',
+        })
+      }
     },
     // 获取页码
     changePage(pageNum) {
       this.pageNum = pageNum
       this.searchGoodsInfo(this.goods_name)
-    }
+    },
   },
 }
 </script>
-
-

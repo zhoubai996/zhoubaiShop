@@ -5,6 +5,8 @@ import store from './store'
 import '@/mock/mockServe'
 // 数据持久化
 import '@/util/localStorage'
+// 导航守卫
+import '@/router/permission'
 // 初始化样式
 import '@/assets/css/reset.css'
 import 'element-ui/lib/theme-chalk/index.css';

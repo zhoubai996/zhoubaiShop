@@ -115,19 +115,13 @@
   <div class="header-container">
     <div id="shortcut">
       <div class="content w">
-        <el-menu
-        :default-active="$router.path"
-        class="el-menu-demo"
-        mode="horizontal"
-        background-color="#545c64"
-        text-color="#fff"
-        router
-        active-text-color="#ffd04b">
+        <el-menu :default-active="$router.path" class="el-menu-demo" mode="horizontal" background-color="#545c64" text-color="#fff" router active-text-color="#ffd04b">
           <el-menu-item index="/home">首页</el-menu-item>
           <el-menu-item index="/login">登录</el-menu-item>
           <el-menu-item index="/register">注册</el-menu-item>
-          <el-menu-item index="4">订单管理</el-menu-item>
-          <el-menu-item index="4">个人中心</el-menu-item>
+          <el-menu-item index="/orderman">订单管理</el-menu-item>
+          <el-menu-item index="/user">个人中心</el-menu-item>
+          <el-menu-item @click="loginOut">退出登录</el-menu-item>
         </el-menu>
       </div>
     </div>
@@ -150,7 +144,6 @@
                 <router-link :to="'/cart'">
                   <el-button size="small">我的购物车</el-button>
                 </router-link>
-                
               </el-badge>
             </div>
           </div>
@@ -185,6 +178,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   name: 'Header',
   data() {
@@ -197,14 +191,30 @@ export default {
   created() {},
   computed: {},
   methods: {
+    ...mapMutations(['CLEARUSERINFO']),
     search() {
       // console.log(this.$router.app._route.fullPath);
       this.$bus.$emit('search', this.input)
       if (this.$router.app._route.fullPath === '/search') {
         return
       }
-      this.$router.push('/search');
-    }
+      this.$router.push('/search')
+    },
+    loginOut() {
+      if (localStorage.getItem('user')) {
+        // 清空vuex数据
+        this.CLEARUSERINFO()
+        // 清除本地数据
+        localStorage.removeItem('user')
+        // 返回登录页面
+        this.$router.push('/login')
+      } else {
+        this.$message({
+          message: '你还未登录',
+          type: 'warning',
+        })
+      }
+    },
   },
 }
 </script>

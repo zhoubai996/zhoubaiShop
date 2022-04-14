@@ -8,6 +8,8 @@ export const reqGetFloorList = () => mockRequest({url: '/floor', method: 'get'})
 export const reqRegister = (userInfo) => request({url: '/users/register', method: 'post', data: userInfo})
 // 发送验证码
 export const reqGetCode = (phone) => request({url: '/users/phone', method: 'post', data: {phone}})
+// 修改密码
+export const updatePass = (password) => request({url: '/users', method: 'patch', data: {password}})
 // 登录接口
 export const userLogin = (userInfo) => request({url: '/users/login', method: 'post', data: userInfo})
 // 获取全部商品
@@ -30,7 +32,19 @@ export const updateCart = (id, goodsInfo) => request({url: `/carts/${id}`, metho
 export const updateAllCheck = (check) => request({url: `carts/select/${check}`, method: 'post'})
 // 删除商品接口
 export const deleteCartGoods = (ids) => request({url: '/carts', method: 'delete', data: {ids}})
-// 获取订单地址
+// 获取地址
 export const reqGetAddress = () => request({url: '/address', method: 'get'})
+// 新增地址
+export const addAddress = (addressInfo) => request({url: '/address', method: 'post', data: addressInfo})
+// 修改地址
+export const updateAddress = (id, addressInfo) => request({url: `/address/${id}`, method: 'put', data: addressInfo})
+// 删除地址
+export const deleteAddress = (id) => request({url: `/address/${id}`, method: 'delete'})
+// 设置默认地址
+export const defaultAddress = (id) => request({url: `/address/${id}`, method: 'patch'})
 // 提交订单
 export const addOrder = (orderInfo) => request({url: '/orders', method: 'post', data: orderInfo})
+// 修改订单接口
+export const updateOrder = (orderId, status) => request({url: `/orders/${orderId}`, method: 'patch', data: {status}})
+// 获取订单接口
+export const reqGetOrder = (status, pageNum, pageSize) => request({url: `/orders?pageNum=${pageNum}&pageSize=${pageSize}&status=${status}`, method: 'get'})

@@ -102,10 +102,11 @@ import Paging from '@/components/Paging.vue'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Cart',
+  inject: ['reload'],
   data() {
     return {
       pageNum: 1,
-      pageSize: 10,
+      pageSize: 100,
       ids: [],
       goods_info: '订单信息'
     }
@@ -146,6 +147,7 @@ export default {
           message: '删除成功',
           type: 'success',
         })
+        this.reload()
       } catch (e) {
         this.$message({
           message: `错误：${e}`,
@@ -175,6 +177,7 @@ export default {
         let id = parseInt(cart.id)
         let goodsInfo = { selected, number }
         await this.$store.dispatch('updateCarts', { id, goodsInfo })
+        this.reload()
       } catch (e) {
         this.$message({
           message: `错误：${e}`,
@@ -191,6 +194,7 @@ export default {
         let id = parseInt(cart.id)
         let goodsInfo = { selected, number }
         await this.$store.dispatch('updateCarts', { id, goodsInfo })
+        this.reload()
       } catch (e) {
         this.$message({
           message: `错误：${e}`,
@@ -204,6 +208,7 @@ export default {
       let checked = event.target.checked
       try {
         await this.$store.dispatch('updataAllChecked', checked)
+        this.reload()
       } catch (e) {
         this.$message({
           message: `错误：${e}`,
@@ -222,6 +227,7 @@ export default {
           message: '删除成功',
           type: 'success',
         })
+        this.reload()
       } catch (e) {
         this.$message({
           message: `错误：${e}`,

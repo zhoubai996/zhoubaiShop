@@ -76,28 +76,26 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // 验证通过，调用登录接口
-          try {
-            this.$store.dispatch('login', this.ruleForm)
-            // 1.存储登录信息/数据持久化(vuex中完成)
-            // 2.跳转网页
-            // 2.1给时间让vuex存储数据
-            setTimeout(() => {
-              this.$router.push('/home')
-            }, 1000)
-          } catch (e) {
-            this.$notify.error({
-              title: '错误',
-              message: `${e.message}`,
-            })
-          }
+          console.log('格式校验通过')
         } else {
-          this.$notify.error({
-            title: '错误',
-            message: '输入的格式有误！',
-          })
+          console.log('校验失败')
           return false
         }
       })
+      try {
+        await this.$store.dispatch('login', this.ruleForm)
+        // 1.存储登录信息/数据持久化(vuex中完成)
+        // 2.跳转网页
+        // 2.1给时间让vuex存储数据
+        setTimeout(() => {
+          this.$router.push('/home')
+        }, 1000)
+      } catch (e) {
+        this.$notify.error({
+          title: '错误',
+          message: `${e.message}`,
+        })
+      }
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()

@@ -1,4 +1,4 @@
-import { userLogin, reqRegister, reqGetCode } from '@/api/index.js'
+import {updatePass, userLogin, reqRegister, reqGetCode } from '@/api/index.js'
 const state = {
   code: 0,
   userInfo: {},
@@ -11,6 +11,10 @@ const mutations = {
   },
   USERREGISTER(state, data) {
     state.userRegister = data
+  },
+  // 清除用户信息
+  CLEARUSERINFO(state) {
+    state.userInfo = {}
   },
   LOGIN(state, data) {
     state.userInfo = data
@@ -53,12 +57,30 @@ const actions = {
       return Promise.reject(new Error('登录错误'))
     }
   },
+  // 修改密码
+  async updatePassword({ commit}, password) {
+    let result = await updatePass(password)
+    if (result.code === 0) {
+      return 'ok'
+    } else {
+      return Promise.reject(new Error('修改错误'))
+    }
+  }
 }
 
 const getters = {
   code(state) {
     return state.code
   },
+  userId(state) {
+    return state.userInfo.id
+  },
+  userName(state) {
+    return state.userInfo.user_name
+  },
+  userPhone(state) {
+    return state.userInfo.phone
+  }
 }
 
 export default {
