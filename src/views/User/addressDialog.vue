@@ -15,7 +15,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">{{ addButton }}</el-button>
-          <el-button @click="dialogShow = false">取 消</el-button>
+          <el-button @click="dialogShows">取 消</el-button>
           <el-button @click="resetForm('ruleForm')">重置</el-button>
         </el-form-item>
       </el-form>
@@ -124,6 +124,9 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields()
     },
+    dialogShows() {
+      this.dialogShow = false
+    }
   },
 }
 </script>

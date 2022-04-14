@@ -117,8 +117,8 @@
       <div class="content w">
         <el-menu :default-active="$router.path" class="el-menu-demo" mode="horizontal" background-color="#545c64" text-color="#fff" router active-text-color="#ffd04b">
           <el-menu-item index="/home">首页</el-menu-item>
-          <el-menu-item index="/login">登录</el-menu-item>
-          <el-menu-item index="/register">注册</el-menu-item>
+          <el-menu-item index="/login" v-show="isShow">登录</el-menu-item>
+          <el-menu-item index="/register" v-show="isShow">注册</el-menu-item>
           <el-menu-item index="/orderman">订单管理</el-menu-item>
           <el-menu-item index="/user">个人中心</el-menu-item>
           <el-menu-item @click="loginOut">退出登录</el-menu-item>
@@ -129,7 +129,7 @@
       <div class="header-content w">
         <div class="logo">
           <h1 class="logo_tit">
-            <a href="//localhost:8080" class="logo_tit_lk">昼白商城</a>
+            <router-link :to="'/home'" class="logo_tit_lk">昼白商城</router-link>
           </h1>
           <h2 class="logo_subtit">昼白商城</h2>
         </div>
@@ -140,7 +140,7 @@
               <el-button class="fr" @click="search">搜索</el-button>
             </div>
             <div class="dropdown">
-              <el-badge :value="12" class="item">
+              <el-badge :value="getCartTotal" class="item">
                 <router-link :to="'/cart'">
                   <el-button size="small">我的购物车</el-button>
                 </router-link>
@@ -149,10 +149,10 @@
           </div>
         </div>
         <div class="navitems">
-          <ul id="navitems-group1">
-            <li>手机</li>
+          <ul id="navitems-group1" @click="searchLi">
+            <li>小米</li>
             <li>华为</li>
-            <li>笔记本</li>
+            <li>苹果</li>
             <li>测试</li>
             <li>华为</li>
             <li>笔记本</li>
@@ -178,20 +178,32 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import { mapMutations } from 'vuex'
 export default {
   name: 'Header',
   data() {
     return {
+      isShow: true,
       input: '',
       activeIndex: '1',
       activeIndex2: '1',
     }
   },
-  created() {},
-  computed: {},
+  created() {
+    this.$bus.$on('isFlod',(val) => {
+      this.isShow = val
+    })
+  },
+  computed: {
+    ...mapGetters(['getCartTotal'])
+  },
   methods: {
     ...mapMutations(['CLEARUSERINFO']),
+    searchLi(event) {
+      this.input = event.target.innerText
+      this.search()
+    },
     search() {
       // console.log(this.$router.app._route.fullPath);
       this.$bus.$emit('search', this.input)

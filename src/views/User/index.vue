@@ -28,7 +28,7 @@
 }
 
 .box-card {
-  width: 480px;
+  width: 100%;
 }
 .address-header {
   height: 50px;

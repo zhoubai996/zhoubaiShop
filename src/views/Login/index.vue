@@ -84,6 +84,7 @@ export default {
       })
       try {
         await this.$store.dispatch('login', this.ruleForm)
+        this.$bus.$emit('isFlod', false)
         // 1.存储登录信息/数据持久化(vuex中完成)
         // 2.跳转网页
         // 2.1给时间让vuex存储数据

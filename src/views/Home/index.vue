@@ -3,6 +3,24 @@
   .content {
     height: 100%;
     // border: 1px solid #ff8040;
+    .box1 {
+      height: 340px;
+      width: 1200px;
+      background-color: #fff;
+      margin: 10px auto;
+    }
+    .box2 {
+      height: 260px;
+      width: 1200px;
+      background-color: #fff;
+      margin: 10px auto;
+    }
+    .box3 {
+      height: 340px;
+      width: 1200px;
+      background-color: #fff;
+      margin: 10px auto;
+    }
   }
   .fs {
     position: relative;
@@ -115,8 +133,19 @@
               </el-carousel-item>
             </el-carousel>
           </div>
-          <div class="fs_col3"></div>
+          <div class="fs_col3">
+            <img src="https://img.codestu.cn/2022/04/14/d01e195238981.png" alt="" style="width:100%;height:100%;">
+          </div>
         </div>
+      </div>
+      <div class="box1">
+        <img src="https://img.codestu.cn/2022/04/14/d7dd3d70e8c7b.png" alt="" style="width:100%;height:100%;">
+      </div>
+      <div class="box2">
+        <img src="https://img.codestu.cn/2022/04/14/06f4eba9a6b51.png" alt="" style="width:100%;height:100%;">
+      </div>
+      <div class="box3">
+        <img src="https://img.codestu.cn/2022/04/14/d8b1d40b5155c.png" alt="" style="width:100%;height:100%;">
       </div>
     </div>
   </div>
